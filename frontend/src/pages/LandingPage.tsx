@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { 
   Code2, Sparkles, Users, Award, ArrowRight, Check, 
-  Play, BookOpen, Target, TrendingUp, Clock, Shield,
+  Play, BookOpen, Target, TrendingUp, Shield,
   Zap, Globe, Gamepad2, Database, Smartphone, Brain,
-  Star, ChevronRight, HelpCircle, CheckCircle2, BarChart3, User
+  Star, ChevronRight, HelpCircle, CheckCircle2, User
 } from 'lucide-react'
 
 export default function LandingPage() {
@@ -628,3 +628,4 @@ export default function LandingPage() {
     </div>
   )
 }
+
