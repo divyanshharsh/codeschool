@@ -3,10 +3,13 @@ import {
   Code2, Sparkles, Users, Award, ArrowRight, Check, 
   Play, BookOpen, Target, TrendingUp, Shield,
   Zap, Globe, Gamepad2, Database, Smartphone, Brain,
-  Star, ChevronRight, HelpCircle, CheckCircle2, User
+  Star, ChevronRight, HelpCircle, CheckCircle2, User,
+  Crown, Rocket, Heart, Sparkle
 } from 'lucide-react'
+import { useState } from 'react'
 
 export default function LandingPage() {
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly')
   const stats = [
     { number: '50,000+', label: 'Active Students', icon: <Users className="h-8 w-8" /> },
     { number: '500+', label: 'Expert Instructors', icon: <Award className="h-8 w-8" /> },
@@ -116,9 +119,12 @@ export default function LandingPage() {
   const pricingPlans = [
     {
       name: 'Starter',
-      price: '$9.99',
-      period: '/month',
+      icon: <Rocket className="h-6 w-6" />,
+      monthlyPrice: 499,
+      annualPrice: 4999,
       description: 'Perfect for individual students',
+      color: 'from-blue-500 to-cyan-500',
+      badge: null,
       features: [
         'Access to basic courses',
         '5 coding exercises per week',
@@ -130,9 +136,12 @@ export default function LandingPage() {
     },
     {
       name: 'Premium',
-      price: '$19.99',
-      period: '/month',
+      icon: <Crown className="h-6 w-6" />,
+      monthlyPrice: 999,
+      annualPrice: 9999,
       description: 'Best for serious learners',
+      color: 'from-primary-600 to-primary-700',
+      badge: 'Most Popular',
       features: [
         'Access to all courses',
         'Unlimited coding exercises',
@@ -146,9 +155,12 @@ export default function LandingPage() {
     },
     {
       name: 'Family',
-      price: '$39.99',
-      period: '/month',
+      icon: <Heart className="h-6 w-6" />,
+      monthlyPrice: 1999,
+      annualPrice: 19999,
       description: 'For families with multiple children',
+      color: 'from-purple-500 to-pink-500',
+      badge: 'Best Value',
       features: [
         'Up to 4 student accounts',
         'All Premium features',
@@ -161,6 +173,13 @@ export default function LandingPage() {
       popular: false,
     },
   ]
+
+  const getSavings = (monthly: number, annual: number) => {
+    const monthlyTotal = monthly * 12
+    const savings = monthlyTotal - annual
+    const percentage = Math.round((savings / monthlyTotal) * 100)
+    return { savings, percentage }
+  }
 
   const testimonials = [
     {
@@ -447,67 +466,185 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Section - Enhanced */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="section-container">
-          <div className="text-center mb-16">
+      {/* Pricing Section - Innovative Design */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-primary-50 relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 right-20 w-96 h-96 bg-primary-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="section-container relative">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl mb-6">
+              <Sparkle className="h-8 w-8 text-white" />
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Simple, Transparent Pricing
+              Choose Your Learning Plan
             </h2>
-            <p className="text-xl text-gray-600">
-              Choose the plan that works best for you. All plans include a 7-day free trial.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+              Affordable pricing options designed for Indian students. Start your 7-day free trial today!
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {pricingPlans.map((plan, index) => (
-              <div
-                key={index}
-                className={`p-8 rounded-2xl bg-white border-2 ${
-                  plan.popular
-                    ? 'border-primary-600 shadow-2xl scale-105 relative'
-                    : 'border-gray-200 hover:border-primary-300'
-                } transition-all duration-300`}
+
+            {/* Billing Toggle */}
+            <div className="inline-flex items-center bg-white p-1 rounded-full border-2 border-gray-200 shadow-lg mb-8">
+              <button
+                onClick={() => setBillingPeriod('monthly')}
+                className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
+                  billingPeriod === 'monthly'
+                    ? 'bg-primary-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-primary-600'
+                }`}
               >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-semibold px-4 py-1 rounded-full shadow-lg">
-                      Most Popular
-                    </div>
-                  </div>
-                )}
-                <h3 className="text-3xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                <p className="text-gray-600 mb-6">{plan.description}</p>
-                <div className="mb-6">
-                  <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
-                  <span className="text-gray-600">{plan.period}</span>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <Check className="h-5 w-5 text-primary-600 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  to="/register"
-                  className={`block text-center py-4 rounded-lg font-semibold transition-colors ${
-                    plan.popular
-                      ? 'btn-primary text-lg'
-                      : 'btn-secondary text-lg'
+                Monthly
+              </button>
+              <button
+                onClick={() => setBillingPeriod('annual')}
+                className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 relative ${
+                  billingPeriod === 'annual'
+                    ? 'bg-primary-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-primary-600'
+                }`}
+              >
+                Annual
+                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  Save 17%
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12">
+            {pricingPlans.map((plan, index) => {
+              const currentPrice = billingPeriod === 'monthly' ? plan.monthlyPrice : plan.annualPrice
+              const savings = billingPeriod === 'annual' ? getSavings(plan.monthlyPrice, plan.annualPrice) : null
+              
+              return (
+                <div
+                  key={index}
+                  className={`relative group ${
+                    plan.popular ? 'md:-mt-4 md:mb-4' : ''
                   }`}
                 >
-                  Get Started
-                </Link>
-              </div>
-            ))}
+                  {/* Popular Badge */}
+                  {plan.popular && (
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+                      <div className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-white text-sm font-bold px-6 py-2 rounded-full shadow-xl flex items-center gap-2 animate-pulse">
+                        <Sparkle className="h-4 w-4" />
+                        {plan.badge}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Card */}
+                  <div
+                    className={`h-full p-8 rounded-3xl border-2 transition-all duration-500 ${
+                      plan.popular
+                        ? 'bg-gradient-to-br from-primary-50 via-white to-primary-50 border-primary-500 shadow-2xl scale-105'
+                        : 'bg-white border-gray-200 hover:border-primary-300 hover:shadow-xl'
+                    }`}
+                  >
+                    {/* Icon and Badge */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${plan.color} text-white shadow-lg`}>
+                        {plan.icon}
+                      </div>
+                      {plan.badge && !plan.popular && (
+                        <span className="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">
+                          {plan.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Plan Name and Description */}
+                    <h3 className="text-3xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                    <p className="text-gray-600 mb-6">{plan.description}</p>
+
+                    {/* Pricing */}
+                    <div className="mb-6">
+                      <div className="flex items-baseline">
+                        <span className="text-5xl font-bold text-gray-900">
+                          ₹{currentPrice.toLocaleString('en-IN')}
+                        </span>
+                        <span className="text-gray-600 ml-2">
+                          /{billingPeriod === 'monthly' ? 'month' : 'year'}
+                        </span>
+                      </div>
+                      {billingPeriod === 'annual' && savings && (
+                        <div className="mt-2 flex items-center gap-2">
+                          <span className="text-sm text-gray-500 line-through">
+                            ₹{(plan.monthlyPrice * 12).toLocaleString('en-IN')}
+                          </span>
+                          <span className="bg-green-100 text-green-700 text-sm font-semibold px-2 py-1 rounded">
+                            Save {savings.percentage}%
+                          </span>
+                        </div>
+                      )}
+                      {billingPeriod === 'monthly' && (
+                        <p className="text-sm text-gray-500 mt-2">
+                          Billed monthly
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Features List */}
+                    <ul className="space-y-4 mb-8">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start group/item">
+                          <div className={`flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br ${plan.color} flex items-center justify-center mr-3 mt-0.5`}>
+                            <Check className="h-4 w-4 text-white" />
+                          </div>
+                          <span className="text-gray-700 group-hover/item:text-gray-900 transition-colors">
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA Button */}
+                    <Link
+                      to="/register"
+                      className={`block w-full text-center py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
+                        plan.popular
+                          ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800 shadow-lg hover:shadow-xl transform hover:scale-105'
+                          : 'bg-gray-900 text-white hover:bg-gray-800 shadow-md hover:shadow-lg'
+                      }`}
+                    >
+                      Get Started Now
+                      <ArrowRight className="inline-block ml-2 h-5 w-5" />
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
           </div>
-          <div className="text-center mt-12">
-            <p className="text-gray-600 mb-4">
-              Need help choosing? <Link to="/about" className="text-primary-600 hover:underline font-semibold">Contact our team</Link>
-            </p>
-            <p className="text-sm text-gray-500">
-              All plans include 7-day free trial • Cancel anytime • No credit card required for trial
+
+          {/* Additional Info */}
+          <div className="text-center space-y-4">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                <span>7-Day Free Trial</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                <span>No Credit Card Required</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                <span>Cancel Anytime</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                <span>Money-Back Guarantee</span>
+              </div>
+            </div>
+            <p className="text-gray-600">
+              Need help choosing?{' '}
+              <Link to="/about" className="text-primary-600 hover:text-primary-700 font-semibold underline">
+                Contact our team
+              </Link>
+              {' '}for personalized recommendations
             </p>
           </div>
         </div>
