@@ -279,13 +279,13 @@ export default function LandingPage() {
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
               Learn Coding & Computer Science
-              <span className="block mt-3 bg-gradient-to-r from-cyan-300 to-yellow-300 bg-clip-text text-transparent">
-                Made Fun for K-12
+              <span className="block mt-3 bg-gradient-to-r from-primary-300 to-yellow-300 bg-clip-text text-transparent">
+                Designed for Grades 8–12
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Interactive courses, hands-on projects, and expert guidance to help students 
-              develop essential coding skills. Start your journey today with our free trial!
+              Project-based courses, exam preparation, and real-world skills to help middle
+              and high-school students build confidence and college-ready portfolios.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link to="/register" className="btn-primary bg-white text-primary-600 hover:bg-gray-100 inline-flex items-center justify-center text-lg px-8 py-4 shadow-xl">

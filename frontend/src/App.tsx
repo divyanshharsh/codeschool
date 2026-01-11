@@ -9,6 +9,7 @@ import HighSchoolCoursesPage from './pages/HighSchoolCoursesPage'
 import CourseDetailPage from './pages/CourseDetailPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import SchoolsPage from './pages/SchoolsPage'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/courses/middle-school" element={<MiddleSchoolCoursesPage />} />
           <Route path="/courses/high-school" element={<HighSchoolCoursesPage />} />
           <Route path="/courses/:segment/:courseId" element={<CourseDetailPage />} />
+          <Route path="/schools" element={<SchoolsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
